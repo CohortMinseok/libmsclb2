@@ -15,21 +15,47 @@ namespace libmsclb2.Networking.Data
         /// <summary>
         /// Constructs a packet with the default size of 64 bytes
         /// </summary>
-        public PacketWriter()
+        public PacketWriter(dynamic header)
         {
             DataBuffer = new byte[64];
+
+            ushort pHeader = 0xFFFF;
+
+            try
+            {
+                pHeader = (ushort)header;
+            }
+            catch
+            {
+                throw new PacketException("Failed to parse the provided header to UInt16.", 3001);
+            }
+
+            ExternalHeader = pHeader;
         }
 
         /// <summary>
         /// Constructs a packet with a variable size
         /// </summary>
         /// <param name="size">The size of the packet in bytes</param>
-        public PacketWriter(int size)
+        public PacketWriter(dynamic header, int size)
         {
             if (size < 6)
                 throw new PacketException("Size is too low. A packet must be 6 bytes or bigger.", 1000);
 
             DataBuffer = new byte[size];
+
+            ushort pHeader = 0xFFFF;
+
+            try
+            {
+                pHeader = (ushort)header;
+            }
+            catch
+            {
+                throw new PacketException("Failed to parse the provided header to UInt16.", 3001);
+            }
+
+            ExternalHeader = pHeader;
         }
 
         /// <summary>
