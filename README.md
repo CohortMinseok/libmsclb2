@@ -79,5 +79,9 @@ public class MyBot
     }
 }
 ```
+## Credits
+* Waty for reversing the WebApi
+* Yaminike/Minike for the FastAES implementation
+* snow, haha01haha01 and jonyleeson for the original MapleLib(2)
 ## Disclaimer
 I am not a professional programmer, in fact I never had a programming class in my life. The only reason this project exists is because of my interest in MapleStory hacking. I spent years messing around with CLB's and gained a lot from it. I felt like this is the time to give something back to the community.
