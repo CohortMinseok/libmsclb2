@@ -12,6 +12,24 @@ namespace libmsclb2.Networking.Data
     /// </summary>
     public sealed class PacketWriter : Packet
     {
+        public unsafe override ushort ExternalHeader
+        {
+            get
+            {
+                fixed (byte* ptr = _DataBuffer)
+                {
+                    return *(ushort*)(ptr + 4);
+                }
+            }
+            set
+            {
+                fixed (byte* ptr = _DataBuffer)
+                {
+                    *(ushort*)(ptr + 4) = value;
+                }
+            }
+        }
+
         /// <summary>
         /// Constructs a packet with the default size of 64 bytes
         /// </summary>
@@ -31,6 +49,7 @@ namespace libmsclb2.Networking.Data
             }
 
             ExternalHeader = pHeader;
+            Position += 6;
         }
 
         /// <summary>
@@ -56,6 +75,7 @@ namespace libmsclb2.Networking.Data
             }
 
             ExternalHeader = pHeader;
+            Position += 6;
         }
 
         /// <summary>
@@ -96,9 +116,9 @@ namespace libmsclb2.Networking.Data
             if (DataBuffer.Length - Position < sizeof(sbyte))
                 AllocateSpace(sizeof(sbyte));
 
-            fixed (byte* ptr = DataBuffer)
+            fixed (byte* ptr = _DataBuffer)
             {
-                *(ptr + Position++) = *(byte*)b;
+                *(sbyte*)(ptr + Position++) = b;
             }
         }
 

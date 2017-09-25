@@ -12,6 +12,24 @@ namespace libmsclb2.Networking.Data
     /// </summary>
     public sealed class PacketReader : Packet
     {
+        public unsafe override ushort ExternalHeader
+        {
+            get
+            {
+                fixed (byte* ptr = _DataBuffer)
+                {
+                    return *(ushort*)(ptr);
+                }
+            }
+            set
+            {
+                fixed (byte* ptr = _DataBuffer)
+                {
+                    *(ushort*)(ptr) = value;
+                }
+            }
+        }
+
         /// <summary>
         /// Constructs a new reader and tries to determine the internal header from the packet.
         /// </summary>

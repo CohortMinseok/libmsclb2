@@ -20,23 +20,7 @@ namespace libmsclb2.Networking.Data
         /// <summary>
         /// The dynamic header assigned by the server
         /// </summary>
-        public unsafe ushort ExternalHeader
-        {
-            get
-            {
-                fixed (byte* ptr = _DataBuffer)
-                {
-                    return *(ushort*)(ptr);
-                }
-            }
-            set
-            {
-                fixed (byte* ptr = _DataBuffer)
-                {
-                    *(ushort*)(ptr) = value;
-                }
-            }
-        }
+        public unsafe abstract ushort ExternalHeader { get; set; }
 
         /// <summary>
         /// The type of incoming packet.
