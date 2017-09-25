@@ -57,8 +57,7 @@ namespace libmsclb2.Cryptography.Transport
         {
             IV.Value = iv;
             GameVersion = gameversion;
-            
-
+          
             IsInitialized = true;
         }
 
